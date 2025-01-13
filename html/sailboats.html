@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/common.css">
+    <link rel="stylesheet" href="../styles/sailboat.css" />
+    <title>IndexPage</title>
+
+</head>
+<body>
+<nav aria-label="Main navigation">
+    <a href="index.html" class="view-link">Home</a>
+    <a href="sailboats.html" class="view-link active">Sailboats</a>
+</nav>
+<main>
+    <section id="sailboat" class="view-content">
+        <header>
+            <h2>Sejlbåde</h2>
+        </header>
+        <table id="tableWrapper">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Sejlbåds type</th>
+                <th>Navn</th>
+                <th>Rediger</th>
+                <th>Resultater</th>
+                <th>Slet</th>
+            </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+        <button id="addSailboat" class="button-style">Tilføj båd</button>
+    </section>
+
+    <dialog>
+        <div class="popUpWrapper">
+            <div id="formHandler">
+                <form id="boatForm" >
+
+                    <input type="hidden" id="boatID" name="boatID">
+
+                    <label for="boatName">Båd Navn</label><br>
+                    <input type="text" id="boatName" name="boatName"><br>
+
+                    <label for="boatType">Båd type</label><br>
+                    <select id="boatType" name="boatType">
+                        <option value="LONGERTHAN40">Større end 40 fod</option>
+                        <option value="SMALLERTHAN25">Mindre end 25 fod</option>
+                        <option value="FROM25TO40">Mellem 25-40</option>
+                    </select>
+
+                    <br>
+                    <button id="submitData" type="submit">Gem</button>
+                </form>
+
+            </div>
+            <div>
+                <button class="close">
+                    Luk
+                </button>
+            </div>
+        </div>
+    </dialog>
+</main>
+</body>
+<script type="module" src="../js/sailboats.js"></script>
+</html>
