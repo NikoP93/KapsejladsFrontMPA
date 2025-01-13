@@ -49,6 +49,12 @@ function putDataInTable(data, index) {
 
 }
 
+const addBtn = document.getElementById("addSailboatBtn")
+addBtn.addEventListener("click",() => {
+    popup.showModal()
+})
+
+
 const closeBtn = document.querySelector(".close")
 closeBtn.addEventListener("click", () => {
     popup.close()
@@ -87,6 +93,31 @@ function editBoat(data){
     }
     return response
 }
+
+
+async function handleFormSubmit(event){
+    event.preventDefault()
+    const form = document.getElementById("boatForm")
+    const formData = new FormData(form)
+    const plainFormData = Object.fromEntries(formData.entries())
+    const url = getIpAdress() + "/sailboat"
+
+    try{
+       const response = await postObjectAsJson(url, plainFormData, "POST")
+        if(!response.ok){
+            alert("Kunne ikke tilføje sejlbåd")
+        } else{
+            alert("Sejlbåd tilføjet")
+            popup.close()
+            fetchBoats()
+        }
+    } catch (error){
+        console.log("Fejl i at tilføje båd", error)
+    }
+}
+
+const submit = document.getElementById("boatForm")
+submit.addEventListener("submit", handleFormSubmit)
 
 
 async function deleteBoat(data){
