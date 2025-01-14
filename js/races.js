@@ -17,7 +17,7 @@ function putRaceDataInTable(data, index) {
       "<td>" + data.boatType + "</td>" +
       "<td>" +
       "<td>" +
-      "<button class='button-style' id='editBtn" + index + "' value='" + data + "'>Tilføj Resultat</button>" +
+      "<button class='button-style' id='editBtn" + index + "' value='" + data + "'>Se Resultat</button>" +
       "</td>"
 
   tr.row=index;

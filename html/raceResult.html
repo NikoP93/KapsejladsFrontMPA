@@ -17,6 +17,7 @@
                 <th>Navn</th>
                 <th>Position</th>
                 <th>Points</th>
+                <th>Status</th>
                 <th>Rediger</th>
                 <th>Slet</th>
 
@@ -27,8 +28,42 @@
         </table>
         <button id="addResultBtn" class="button-style">Tilføj Resultat</button>
     </section>
+
+    <dialog>
+        <div class="popUpWrapper">
+
+            <h3 id="boatName"></h3>
+
+            <form id="updateRaceForm">
+
+                <input type="hidden" id="resultID" name="resultID">
+                <input type="hidden" id="boatID" name="boatID">
+                <input type="hidden" id="raceID" name="raceID">
+
+                <label for="position">Position</label><br>
+                <input type="number" id="position" name="position"> <br>
+
+                <label for="points">Points</label><br>
+                <input type="number" id="points" name="points">
+
+                <label for="status">Status</label><br>
+                <select id="status" name="status">
+                    <option value="Completed">Completed</option>
+                    <option value="NotCompleted">Not Completed</option>
+                    <option value="EarlyStart">Early Start</option>
+                    <option value="NotStarted">Not Started</option>
+                </select><br>
+                <button id="submit" type="submit">Gem</button>
+
+
+
+            </form>
+
+        </div>
+        <button class="close">Luk</button>
+    </dialog>
 </main>
 
 </body>
-<script type="module" src="../js/raceResults.js"> </script>
+<script type="module" src="../js/raceResults.js"></script>
 </html>
