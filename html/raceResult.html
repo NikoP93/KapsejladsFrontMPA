@@ -36,15 +36,16 @@
 
             <form id="updateRaceForm">
 
-                <input type="hidden" id="resultID" name="resultID">
-                <input type="hidden" id="boatID" name="boatID">
-                <input type="hidden" id="raceID" name="raceID">
-
                 <label for="position">Position</label><br>
                 <input type="number" id="position" name="position"> <br>
 
                 <label for="points">Points</label><br>
                 <input type="number" id="points" name="points">
+
+                <label for="boats">Både</label>
+                <select id="boats" name="boats">
+
+                </select>
 
                 <label for="status">Status</label><br>
                 <select id="status" name="status">
@@ -55,13 +56,40 @@
                 </select><br>
                 <button id="submit" type="submit">Gem</button>
 
+            </form>
 
+        </div>
+        <button class="close">Luk</button>
+    </dialog>
+
+    <dialog>
+        <div class="popUpWrapper">
+
+            <form id="AddRaceForm">
+
+
+
+                <label for="position1">Position</label><br>
+                <input type="number" id="position1" name="position"> <br>
+
+                <label for="points1">Points</label><br>
+                <input type="number" id="points1" name="points">
+
+                <label for="status1">Status</label><br>
+                <select id="status1" name="status">
+                    <option value="Completed">Completed</option>
+                    <option value="NotCompleted">Not Completed</option>
+                    <option value="EarlyStart">Early Start</option>
+                    <option value="NotStarted">Not Started</option>
+                </select><br>
+                <button id="submit1" type="submit">Gem</button>
 
             </form>
 
         </div>
         <button class="close">Luk</button>
     </dialog>
+
 </main>
 
 </body>
