@@ -29,7 +29,7 @@
         <button id="addResultBtn" class="button-style">Tilføj Resultat</button>
     </section>
 
-    <dialog>
+    <dialog id="modal1">
         <div class="popUpWrapper">
 
             <h3 id="boatName"></h3>
@@ -42,10 +42,7 @@
                 <label for="points">Points</label><br>
                 <input type="number" id="points" name="points">
 
-                <label for="boats">Både</label>
-                <select id="boats" name="boats">
 
-                </select>
 
                 <label for="status">Status</label><br>
                 <select id="status" name="status">
@@ -62,12 +59,11 @@
         <button class="close">Luk</button>
     </dialog>
 
-    <dialog>
+    <dialog id="modal2">
         <div class="popUpWrapper">
 
+
             <form id="AddRaceForm">
-
-
 
                 <label for="position1">Position</label><br>
                 <input type="number" id="position1" name="position"> <br>
@@ -82,6 +78,12 @@
                     <option value="EarlyStart">Early Start</option>
                     <option value="NotStarted">Not Started</option>
                 </select><br>
+
+                <label for="boats">Både</label>
+                <select id="boats" name="boats">
+
+                </select>
+
                 <button id="submit1" type="submit">Gem</button>
 
             </form>

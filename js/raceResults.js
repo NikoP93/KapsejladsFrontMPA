@@ -1,13 +1,12 @@
 import{getIpAdress,restDelete,fetchAnyUrl,postObjectAsJson} from "./module.js";
 
-const popup = document.querySelector("dialog")
+const popup = document.getElementById("modal1")
+const popupAdd = document.getElementById("modal2")
+const raceID = window.localStorage.getItem("RaceID");
 
-
-//Store det fulde race i localStorage. Brug fetch raceID til url og
-// fetch boattype og brug det til at adde
 
 async function fetchRaceResults(){
-    const raceID = window.localStorage.getItem("RaceID");
+
     const url = getIpAdress() + "/resultsbyraceid/" + raceID
     const data = await fetchAnyUrl(url);
     tableBody.innerHTML = "";
@@ -46,10 +45,11 @@ function putDataInTable(data, index) {
     })
 }
 
+const addBtn = document.getElementById("addResultBtn")
+addBtn.addEventListener("click",addResult)
+
 function editResult(data){
     popup.showModal()
-
-    addResult()
 
     const positionField = document.getElementById("position")
     positionField.value = data.position
@@ -125,31 +125,61 @@ async function updateResult(){
     }
 }
 
-function addResult() {
+async function addResult() {
+    const raceURL = getIpAdress() + "/race/" + raceID
+    console.log("Dette er raceURL" + raceURL)
+    const race = await fetchAnyUrl(raceURL)
+    console.log("Dette er race: " + race)
 
-    const boats = [
-        {
-            "boatID": 1,
-            "boatType": "LONGERTHAN40",
-            "boatName": "F24"
-        },
-        {
-            "boatID": 4,
-            "boatType": "LONGERTHAN40",
-            "boatName": "Hans peter"
-        }
-    ]
+    const boatType = race.boatType
+    const boatsURL = getIpAdress() + "/sailboats/" + boatType
+    const boats = await fetchAnyUrl(boatsURL)
+    console.log("Dette er de både der er blevet fetched: " + boats)
 
     const boatSelect = document.getElementById("boats")
 
-    boats.forEach(function(boat, index) {
+    boats.forEach(boat => {
         const op = document.createElement("option")
         op.setAttribute("value", boat.boatID)
         op.innerHTML = boat.boatName
         boatSelect.appendChild(op)
     });
 
+    popupAdd.showModal()
+
 }
+
+async function handleFormSubmit(event){
+    event.preventDefault()
+
+    const position = document.getElementById("position1").value
+    const points = document.getElementById("points1").value
+    const status = document.getElementById("status1").value
+    const boat = document.getElementById("boats").value
+
+    const resultData = {
+        position: position,
+        points: points,
+        status: status,
+        race: {raceID: raceID},
+        sailboat: {boatID: boat},
+    }
+
+    const url = getIpAdress() + "/result"
+
+    const response = await postObjectAsJson(url, resultData,"POST")
+    if(!response.ok){
+        alert("Kunne tilføje resultat")
+    }else{
+        alert("Data er opdateret")
+        popupAdd.close;
+        fetchRaceResults()
+    }
+
+}
+
+const addResultForm = document.getElementById("AddRaceForm")
+addResultForm.addEventListener("submit", handleFormSubmit);
 
 async function deleteResult(data){
     const url = getIpAdress() + "/result/" + data.resultID
@@ -160,6 +190,11 @@ async function deleteResult(data){
         fetchRaceResults()
     }
 }
+
+const closeBtn = document.querySelector(".close")
+closeBtn.addEventListener("click", () => {
+    popup.close()
+})
 
 
 fetchRaceResults()
